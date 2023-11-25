@@ -1,0 +1,388 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "3BDCAC05-C402-4BCA-9D19-B8356C245C97"
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "703ED262-C2E1-42E7-AED8-DD3624604F75"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MyWidget/MyWidget.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "35"
+            endingLineNumber = "35"
+            landmarkName = "getTimeline(in:completion:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "703ED262-C2E1-42E7-AED8-DD3624604F75 - 70d8b919d136fccc"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MyWidgetExtension.Provider.getTimeline(in: WidgetKit.TimelineProviderContext, completion: (WidgetKit.Timeline&lt;MyWidgetExtension.SimpleEntry&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "MyWidgetExtension"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/limeng/Documents/allProjects/iosProjects/QuotesTailored/MyWidget/MyWidget.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "25"
+                  endingLineNumber = "25"
+                  offsetFromSymbolStart = "560">
+               </Location>
+               <Location
+                  uuid = "703ED262-C2E1-42E7-AED8-DD3624604F75 - 70d8b919d136fc2b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MyWidgetExtension.Provider.getTimeline(in: WidgetKit.TimelineProviderContext, completion: (WidgetKit.Timeline&lt;MyWidgetExtension.SimpleEntry&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "MyWidgetExtension"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/limeng/Documents/allProjects/iosProjects/QuotesTailored/MyWidget/MyWidget.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "28"
+                  endingLineNumber = "28"
+                  offsetFromSymbolStart = "1933">
+               </Location>
+               <Location
+                  uuid = "703ED262-C2E1-42E7-AED8-DD3624604F75 - 70d8b919d136ff02"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MyWidgetExtension.Provider.getTimeline(in: WidgetKit.TimelineProviderContext, completion: (WidgetKit.Timeline&lt;MyWidgetExtension.SimpleEntry&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "MyWidgetExtension"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/limeng/Documents/allProjects/iosProjects/QuotesTailored/MyWidget/MyWidget.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "35"
+                  endingLineNumber = "35"
+                  offsetFromSymbolStart = "1936">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A5BE14E5-942F-43F4-831D-130A0BA76DF5"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MyWidget/MyWidget.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "50"
+            endingLineNumber = "50"
+            landmarkName = "getTimeline(in:completion:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "A5BE14E5-942F-43F4-831D-130A0BA76DF5 - c68cf1e30a9b991b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 @Sendable (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in MyWidgetExtension.Provider.getTimeline(in: WidgetKit.TimelineProviderContext, completion: (WidgetKit.Timeline&lt;MyWidgetExtension.SimpleEntry&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "MyWidgetExtension"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/limeng/Documents/allProjects/iosProjects/QuotesTailored/MyWidget/MyWidget.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "40"
+                  endingLineNumber = "40"
+                  offsetFromSymbolStart = "961">
+               </Location>
+               <Location
+                  uuid = "A5BE14E5-942F-43F4-831D-130A0BA76DF5 - c68cf1e30a9b99be"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 @Sendable (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in MyWidgetExtension.Provider.getTimeline(in: WidgetKit.TimelineProviderContext, completion: (WidgetKit.Timeline&lt;MyWidgetExtension.SimpleEntry&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "MyWidgetExtension"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/limeng/Documents/allProjects/iosProjects/QuotesTailored/MyWidget/MyWidget.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "43"
+                  endingLineNumber = "43"
+                  offsetFromSymbolStart = "881">
+               </Location>
+               <Location
+                  uuid = "A5BE14E5-942F-43F4-831D-130A0BA76DF5 - c68cf1e30a9ba651"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 @Sendable (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in MyWidgetExtension.Provider.getTimeline(in: WidgetKit.TimelineProviderContext, completion: (WidgetKit.Timeline&lt;MyWidgetExtension.SimpleEntry&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "MyWidgetExtension"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/limeng/Documents/allProjects/iosProjects/QuotesTailored/MyWidget/MyWidget.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "50"
+                  endingLineNumber = "50"
+                  offsetFromSymbolStart = "830">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "422AB321-45EF-423C-825C-2396270924E5"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "QuotesTailored/ContentView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "71"
+            endingLineNumber = "71"
+            landmarkName = "unknown"
+            landmarkType = "0">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "FA84675F-283B-4645-983B-AE757C163285"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "QuotesTailored/ContentView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "106"
+            endingLineNumber = "106"
+            landmarkName = "unknown"
+            landmarkType = "0">
+            <Locations>
+               <Location
+                  uuid = "FA84675F-283B-4645-983B-AE757C163285 - 98782602f1abb84e"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; () in closure #4 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.keyboardShortcut(SwiftUI.KeyboardShortcut) -&gt; some&gt;&gt;.0, SwiftUI.Button&lt;SwiftUI.Text&gt;)&gt; in closure #1 () -&gt; &lt;&lt;opaque return type of SwiftUI.View.buttonStyle&lt;&#x3c4;_0_0 where &#x3c4;_1_0: SwiftUI.PrimitiveButtonStyle&gt;(&#x3c4;_1_0) -&gt; some&gt;&gt;.0 in QuotesTailored.ContentView.body.getter : some"
+                  moduleName = "QuotesTailored"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/limeng/Documents/allProjects/iosProjects/QuotesTailored/QuotesTailored/ContentView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "107"
+                  endingLineNumber = "107"
+                  offsetFromSymbolStart = "29">
+               </Location>
+               <Location
+                  uuid = "FA84675F-283B-4645-983B-AE757C163285 - 98782602f1abb829"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; () in closure #4 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.keyboardShortcut(SwiftUI.KeyboardShortcut) -&gt; some&gt;&gt;.0, SwiftUI.Button&lt;SwiftUI.Text&gt;)&gt; in closure #1 () -&gt; &lt;&lt;opaque return type of SwiftUI.View.buttonStyle&lt;&#x3c4;_0_0 where &#x3c4;_1_0: SwiftUI.PrimitiveButtonStyle&gt;(&#x3c4;_1_0) -&gt; some&gt;&gt;.0 in QuotesTailored.ContentView.body.getter : some"
+                  moduleName = "QuotesTailored"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/limeng/Documents/allProjects/iosProjects/QuotesTailored/QuotesTailored/ContentView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "106"
+                  endingLineNumber = "106"
+                  offsetFromSymbolStart = "64">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "150F7C4E-64E5-4734-8AF3-CFE4A234BBE5"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "QuotesTailored/MainView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "212"
+            endingLineNumber = "212"
+            landmarkName = "ratingCheck()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "150F7C4E-64E5-4734-8AF3-CFE4A234BBE5 - 5ce759f24890aa87"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "QuotesTailored.MainView.ratingCheck() -&gt; ()"
+                  moduleName = "QuotesTailored"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/limeng/Documents/allProjects/iosProjects/QuotesTailored/QuotesTailored/MainView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "205"
+                  endingLineNumber = "205"
+                  offsetFromSymbolStart = "102">
+               </Location>
+               <Location
+                  uuid = "150F7C4E-64E5-4734-8AF3-CFE4A234BBE5 - 5ce759f24890aa87"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "QuotesTailored.MainView.ratingCheck() -&gt; ()"
+                  moduleName = "QuotesTailored"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/limeng/Documents/allProjects/iosProjects/QuotesTailored/QuotesTailored/MainView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "205"
+                  endingLineNumber = "205"
+                  offsetFromSymbolStart = "188">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E8AD1FF5-E2CB-4C4E-A6E8-171197EB32FC"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "QuotesTailored/MainView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "160"
+            endingLineNumber = "160"
+            landmarkName = "body"
+            landmarkType = "24">
+            <Locations>
+               <Location
+                  uuid = "E8AD1FF5-E2CB-4C4E-A6E8-171197EB32FC - 2bba7fef760b071f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #4 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.keyboardShortcut(SwiftUI.KeyboardShortcut) -&gt; some&gt;&gt;.0, SwiftUI.Button&lt;SwiftUI.Text&gt;)&gt; in QuotesTailored.MainView.body.getter : some"
+                  moduleName = "QuotesTailored"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/limeng/Documents/allProjects/iosProjects/QuotesTailored/QuotesTailored/MainView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "153"
+                  endingLineNumber = "153"
+                  offsetFromSymbolStart = "309">
+               </Location>
+               <Location
+                  uuid = "E8AD1FF5-E2CB-4C4E-A6E8-171197EB32FC - 8ff1e78c3fc85de0"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; () in closure #4 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.keyboardShortcut(SwiftUI.KeyboardShortcut) -&gt; some&gt;&gt;.0, SwiftUI.Button&lt;SwiftUI.Text&gt;)&gt; in QuotesTailored.MainView.body.getter : some"
+                  moduleName = "QuotesTailored"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/limeng/Documents/allProjects/iosProjects/QuotesTailored/QuotesTailored/MainView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "154"
+                  endingLineNumber = "154"
+                  offsetFromSymbolStart = "64">
+               </Location>
+               <Location
+                  uuid = "E8AD1FF5-E2CB-4C4E-A6E8-171197EB32FC - 2bba7fef760b071f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #4 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.keyboardShortcut(SwiftUI.KeyboardShortcut) -&gt; some&gt;&gt;.0, SwiftUI.Button&lt;SwiftUI.Text&gt;)&gt; in QuotesTailored.MainView.body.getter : some"
+                  moduleName = "QuotesTailored"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/limeng/Documents/allProjects/iosProjects/QuotesTailored/QuotesTailored/MainView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "153"
+                  endingLineNumber = "153"
+                  offsetFromSymbolStart = "540">
+               </Location>
+               <Location
+                  uuid = "E8AD1FF5-E2CB-4C4E-A6E8-171197EB32FC - 8ff1e78c3fc85de0"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; () in closure #4 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.keyboardShortcut(SwiftUI.KeyboardShortcut) -&gt; some&gt;&gt;.0, SwiftUI.Button&lt;SwiftUI.Text&gt;)&gt; in QuotesTailored.MainView.body.getter : some"
+                  moduleName = "QuotesTailored"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/limeng/Documents/allProjects/iosProjects/QuotesTailored/QuotesTailored/MainView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "154"
+                  endingLineNumber = "154"
+                  offsetFromSymbolStart = "76">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "CE29A233-3E96-4266-9B26-7FD32362567E"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "QuotesTailored/MainView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "225"
+            endingLineNumber = "225"
+            landmarkName = "ratingCheck()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "CE29A233-3E96-4266-9B26-7FD32362567E - 5ce759f24890a93a"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "QuotesTailored.MainView.ratingCheck() -&gt; ()"
+                  moduleName = "QuotesTailored"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/limeng/Documents/allProjects/iosProjects/QuotesTailored/QuotesTailored/MainView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "218"
+                  endingLineNumber = "218"
+                  offsetFromSymbolStart = "1993">
+               </Location>
+               <Location
+                  uuid = "CE29A233-3E96-4266-9B26-7FD32362567E - 5ce759f24890a93a"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "QuotesTailored.MainView.ratingCheck() -&gt; ()"
+                  moduleName = "QuotesTailored"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/limeng/Documents/allProjects/iosProjects/QuotesTailored/QuotesTailored/MainView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "218"
+                  endingLineNumber = "218"
+                  offsetFromSymbolStart = "1720">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "07AA4D24-EDF2-4F1D-B60E-6A65026211CA"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MyWidget/MyWidget.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "74"
+            endingLineNumber = "74"
+            landmarkName = "getTimeline(in:completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>

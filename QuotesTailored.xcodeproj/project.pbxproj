@@ -17,6 +17,7 @@
 		B0C821902AF1C8BC00F2CC8C /* MyWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0C8218F2AF1C8BC00F2CC8C /* MyWidget.swift */; };
 		B0C821922AF1C8BE00F2CC8C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B0C821912AF1C8BE00F2CC8C /* Assets.xcassets */; };
 		B0C821962AF1C8BE00F2CC8C /* MyWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = B0C821862AF1C8BC00F2CC8C /* MyWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		E45C43052B0A203D0077DF83 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E45C43042B0A203D0077DF83 /* MainView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +59,8 @@
 		B0C821932AF1C8BE00F2CC8C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B0C8219B2AF1CD8200F2CC8C /* QuotesTailored.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = QuotesTailored.entitlements; sourceTree = "<group>"; };
 		B0C8219C2AF1CD9900F2CC8C /* MyWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MyWidgetExtension.entitlements; sourceTree = "<group>"; };
+		E45C43032B09AFAC0077DF83 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		E45C43042B0A203D0077DF83 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,11 +106,13 @@
 		B0C821732AF1C89100F2CC8C /* QuotesTailored */ = {
 			isa = PBXGroup;
 			children = (
+				E45C43032B09AFAC0077DF83 /* Info.plist */,
 				B0C8219B2AF1CD8200F2CC8C /* QuotesTailored.entitlements */,
 				B0C821742AF1C89100F2CC8C /* QuotesTailoredApp.swift */,
 				B0C821762AF1C89100F2CC8C /* ContentView.swift */,
 				B0C821782AF1C89300F2CC8C /* Assets.xcassets */,
 				B0C8217A2AF1C89300F2CC8C /* Preview Content */,
+				E45C43042B0A203D0077DF83 /* MainView.swift */,
 			);
 			path = QuotesTailored;
 			sourceTree = "<group>";
@@ -204,6 +209,7 @@
 			knownRegions = (
 				en,
 				Base,
+				fr,
 			);
 			mainGroup = B0C821682AF1C89100F2CC8C;
 			productRefGroup = B0C821722AF1C89100F2CC8C /* Products */;
@@ -242,6 +248,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B0C821772AF1C89100F2CC8C /* ContentView.swift in Sources */,
+				E45C43052B0A203D0077DF83 /* MainView.swift in Sources */,
 				B0C821752AF1C89100F2CC8C /* QuotesTailoredApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -398,6 +405,7 @@
 				DEVELOPMENT_TEAM = 2HTZ423MZ4;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = QuotesTailored/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Quotes Tailored";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -408,7 +416,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2;
+				MARKETING_VERSION = 1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = tonyc.QuotesTailored;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -433,6 +441,7 @@
 				DEVELOPMENT_TEAM = 2HTZ423MZ4;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = QuotesTailored/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Quotes Tailored";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -443,7 +452,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2;
+				MARKETING_VERSION = 1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = tonyc.QuotesTailored;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

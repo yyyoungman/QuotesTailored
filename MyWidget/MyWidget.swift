@@ -7,6 +7,7 @@
 
 import WidgetKit
 import SwiftUI
+import os
 
 let appGroup = "group.tonyc.QuotesTailored"
 
@@ -21,11 +22,21 @@ struct Provider: TimelineProvider {
     }
 
     func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
+        let logger = Logger(subsystem: Bundle.main.bundleIdentifier!, category: "network")
+        logger.log("tctc getTimeline")
+        
+//        var entries: [SimpleEntry] = []
+//        let entryDate = Calendar.current.date(byAdding: Calendar.Component.hour, value: 1, to: Date())!
+//        let entry = SimpleEntry(date: entryDate, quote: "quote1", author: "author1", imageName: "default_bg")
+//        entries.append(entry)
+//        let timeline = Timeline(entries: entries, policy: .atEnd)
+//        completion(timeline)
+        
         let urlStr = "https://ailisteners.com/v1"
-        guard let wishStr = UserDefaults(suiteName: appGroup)!.string(forKey: "wish") else {return}
+        let wishStr = UserDefaults(suiteName: appGroup)?.string(forKey: "wish") ?? "I want to get motivated"
         let udid = UIDevice.current.identifierForVendor?.uuidString ?? "unknown_udid"
         let payloadStr = "{\"wishStr\": \"" + wishStr + "\", \"udid\": \"" + udid + "\"}"
-        print("payloadStr = ", payloadStr)
+//        print("payloadStr = ", payloadStr)
         
         guard let url = URL(string: urlStr),
             let payload = payloadStr.data(using: .utf8) else { return }
@@ -38,24 +49,7 @@ struct Provider: TimelineProvider {
         URLSession.shared.dataTask(with: request) { (data, response, error) in
             guard error == nil else { print(error!.localizedDescription); return }
             guard let data = data else { print("Empty data"); return }
-
-            let str = String(data: data, encoding: .utf8) ?? "no data"
-//            print(str)
-            
-//            var answer = "The journey of a thousand miles begins with one step. | LaoTzu\nStay hungry, stay foolish. | Steve Jobs"
             let json = try? JSONSerialization.jsonObject(with: data, options: [])
-//            if let dictionary = json as? [String: Any] {
-//                if let choices = dictionary["choices"] as? [Any] {
-//                    if let firstChoice = choices.first as? [String: Any] {
-//                        if let message = firstChoice["message"] as? [String: Any] {
-//                            if let content = message["content"] as? String {
-////                                print(content)
-//                                answer = content
-//                            }
-//                        }
-//                    }
-//                }
-//            }
             
             var interval = 4
             var intervalUnit = Calendar.Component.hour
@@ -75,20 +69,7 @@ struct Provider: TimelineProvider {
             
             var entries: [SimpleEntry] = []
             let currentDate = Date()
-//            let myStrings = answer.components(separatedBy: .newlines)
-//            let num_lines = myStrings.count//  - 1
             let imageName = "default_bg"
-//            for i in 0 ..< num_lines {
-//                let entryDate = Calendar.current.date(byAdding: intervalUnit, value: i*interval, to: currentDate)!
-//                let line = myStrings[i].components(separatedBy: "|")
-//                if line.count < 2 {
-//                    continue
-//                }
-//                let quote_text = line[0]
-//                let author_text = line[1]
-//                let entry = SimpleEntry(date: entryDate, quote: quote_text, author: author_text, imageName: imageName)
-//                entries.append(entry)
-//            }
             var i = 0
             if let jsonArray = json as? [Dictionary<String, String>] {
                 for item in jsonArray {
