@@ -11,7 +11,6 @@ import SwiftUI
 struct QuotesTailoredApp: App {
     var body: some Scene {
         WindowGroup {
-//            ContentView()
             MainView()
         }
     }
