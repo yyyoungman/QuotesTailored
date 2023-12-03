@@ -14,86 +14,34 @@ let udkey_curIdx = "curIdx"
 struct MainView: View {
     @State private var showThoughts = false
     @State private var disableThoughtsCancel = false
+    @State private var newThought = false
     
-//    @State var now = Date()
-//    let timer = Timer.publish(every: 8, on: .current, in: .common).autoconnect()
-    
-    @State var quoteText = "example quote"
+    @State private var showAddOwn = false
     
     @ObservedObject var requestQuotes = RequestQuotes.shared
     
-//    @State private var quotesList = ["initial quote"]
-//    @State private var authorsList = ["initial author"]
-    
-    @State private var quotesList: [Dictionary<String, String>] = [["quote": "Loading quotes...", "author": ""]]
+    @State private var displayList: [Dictionary<String, String>] = [["quote": "Loading quotes...", "author": ""]]
     @State private var curIdx = 0
+    @State private var displayQuote = "Loading quotes..."
+    @State private var displayAuthor = ""
+    enum DisplayStatus {
+        case loading
+        case showing
+        case error
+    }
+    @State private var displayStatus = DisplayStatus.loading
     
     let logger = Logger(subsystem: Bundle.main.bundleIdentifier!, category: "mainview")
-
-//    @State private var isLoading = false
 
     var body: some View {
         VStack {
             Spacer()
-            Text("\(quotesList[curIdx]["quote"] ?? "Loading quotes...")")
-                .foregroundColor(.white)
-                .font(.largeTitle)
-                .bold()
-                .padding()
-            Text("\(quotesList[curIdx]["author"] ?? "")")
-                .foregroundColor(.white)
-                .font(.title3)
-                .bold()
-            .onChange(of: requestQuotes.quotesUpdateCount) { newValue in
-                readQuoteList(resetCurIdx: true)
-            }
-//            Text("\(now)")
-//            Text("\(quoteText)")
-//            .onReceive(timer,
-//                       perform: {_ in
-////                self.now = Date()
-//                updateCurQuote()
-//            })
-            .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
-                updateCurQuote()
-            }
-//            Text(requestQuotes.quoteJson)
-//            TabView {
-//                Text("First")
-//                Text("Second")
-//                Text("Third")
-//                Text("Fourth")
-//            }
-//            .tabViewStyle(.page(indexDisplayMode: .never))
             
-            if (requestQuotes.preparingQuotes) {
-                ProgressView()
-                    .progressViewStyle(CircularProgressViewStyle(tint: .blue))
-                    .scaleEffect(2.0, anchor: .center) // Makes the spinner larger
-            }
+            quotesView
             
             Spacer()
-            Button(action: {
-                showThoughts = true
-                disableThoughtsCancel = false
-            }) {
-                Spacer()
-                Label("Thoughts", systemImage: "square.and.pencil")
-                    .foregroundColor(.white)
-                    .padding()
-                    .background(
-                        RoundedRectangle(cornerRadius: 8)
-                            .fill(Color.black.opacity(0.5))
-                    )
-                Spacer()
-            }
-            .foregroundColor(.blue)
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .sheet(isPresented: $showThoughts) {
-//                thoughts
-                ThoughtsView(showModal: self.$showThoughts, disableCancel: self.$disableThoughtsCancel)
-//                .presentationDetents([.fraction(0.1), .large])
-            }
+            
+            menuView
         }
         .background(
             Image("default_bg")
@@ -104,69 +52,235 @@ struct MainView: View {
         )
         .onAppear() {
             checkFirstStart()
-            readQuoteList(resetCurIdx: false)
-            updateCurQuote()
+            loadQuoteList(resetCurIdx: false)
+            showNextQuote()
         }
     }
     
-    func updateCurQuote() {
-        ReportUtils.shared.sendRequest(key: "enteredMainUI", value: "")
-        let lastQuoteTimestamp = UserDefaults.standard.object(forKey: udkey_lastQuoteTimestamp) as? Date ?? Date()
-        print("lastQuoteTimestamp", lastQuoteTimestamp)
-        let elaspedHours: Int = Calendar.current.component(.hour, from: lastQuoteTimestamp)
-        var interval = 3
-        let intervalStr = UserDefaults.standard.string(forKey: udkey_refresh)
-        if intervalStr == "1 hour" {
-            interval = 1
-        } else if intervalStr == "3 hours" {
-            interval = 3
-        } else if intervalStr == "24 hours" {
-            interval = 24
+    var quotesView: some View {
+        VStack {
+            Text(displayQuote)
+                .foregroundColor(.white)
+                .font(.largeTitle)
+                .bold()
+                .padding()
+            Text(displayAuthor)
+                .foregroundColor(.white)
+                .font(.title3)
+                .bold()
+                .onChange(of: requestQuotes.requestStatus) { newValue in
+                    if requestQuotes.requestStatus == .newList {
+                        // when new list ready, reload list. if display is loading, update display; if not, don't update
+                        loadQuoteList(resetCurIdx: true)
+                        requestQuotes.requestStatus = .idle
+                    }
+                }
+                .onChange(of: newThought) { newValue in
+                    if newThought {
+                        // show loading screen
+                        showNextQuote()
+                        newThought = false
+                    }
+                }
+                .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
+                    // update quote
+                    showNextQuote()
+                }
+            //            Text(requestQuotes.quoteJson)
+            //            TabView {
+            //                Text("First")
+            //                Text("Second")
+            //                Text("Third")
+            //                Text("Fourth")
+            //            }
+            //            .tabViewStyle(.page(indexDisplayMode: .never))
+            
+            if (displayStatus == .loading) {
+                ProgressView()
+                    .progressViewStyle(CircularProgressViewStyle(tint: .blue))
+                    .scaleEffect(2.0, anchor: .center) // Makes the spinner larger
+            }
         }
+    }
+    
+    var menuView: some View {
+        ZStack {
+            HStack {
+                Spacer()
+                Button(action: {
+                    showAddOwn = true
+                }) {
+//                    Label("", systemImage: "plus.app")
+                    Image(systemName: "plus.app")
+                        .foregroundColor(.white)
+                        .padding()
+                        .background(
+                            RoundedRectangle(cornerRadius: 8)
+                                .fill(Color.black.opacity(0.5))
+                        )
+                    
+                }
+                .foregroundColor(.blue)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .sheet(isPresented: $showAddOwn) {
+                    AddOwnView(showModal: self.$showAddOwn)
+                        .presentationDetents([.medium])
+                }
+            }
+            
+            HStack {
+                Button(action: {
+                    showThoughts = true
+                    disableThoughtsCancel = false
+                }) {
+                    Label("Thoughts", systemImage: "square.and.pencil")
+                        .foregroundColor(.white)
+                        .padding()
+                        .background(
+                            RoundedRectangle(cornerRadius: 8)
+                                .fill(Color.black.opacity(0.5))
+                        )
+                }
+                .foregroundColor(.blue)
+//                .frame(maxWidth: .infinity, alignment: .leading)
+                .sheet(isPresented: $showThoughts) {
+                    ThoughtsView(showModal: self.$showThoughts, disableCancel: self.$disableThoughtsCancel, newThought: self.$newThought)
+//                        .presentationDetents([.fraction(0.1), .large])
+                }
+            }
+        }
+    }
+    
+    func showNextQuote() {
+        print("[MainView] showNextQuote")
+        ReportUtils.shared.sendRequest(key: "enteredMainUI", value: "")
+
+        // if new batch is being prepared, show loading
+        // if requestQuotes.preparingQuotes {
+        if requestQuotes.requestStatus == .requesting {
+            displayStatus = .loading
+            displayQuote = "Preparing quotes..."
+            displayAuthor = ""
+            return
+        }
+        displayStatus = .showing
+
+        // check time elasped since last display, if > interval, show next quote
+        let lastQuoteTimestamp = UserDefaults.standard.object(forKey: udkey_lastQuoteTimestamp) as? Date ?? Date()
+        print("[MainView] lastQuoteTimestamp", lastQuoteTimestamp)
+        let elaspedHours: Int = Calendar.current.component(.hour, from: lastQuoteTimestamp)
+        let interval = RefreshTime.getUserDefault().intValue
         if elaspedHours > interval {
-            if curIdx < quotesList.count - 1 {
-                curIdx = (curIdx + 1) % quotesList.count
-                UserDefaults.standard.set(curIdx, forKey: udkey_curIdx)
-                logger.log("curIdx: \(curIdx)")
-            } else {
-                RequestQuotes.shared.getQuotes()
+            curIdx = (curIdx + 1) % displayList.count
+            UserDefaults.standard.set(curIdx, forKey: udkey_curIdx)
+            print("[MainView] curIdx: \(curIdx)")
+
+            // if there is only one quote left, request next batch
+            if curIdx >= displayList.count - 1 {
+                RequestQuotes.shared.requestQuotes()
             }
         }
 
+        displayQuote = displayList[curIdx]["quote"] ?? "Loading quotes..."
+        displayAuthor = displayList[curIdx]["author"] ?? ""
+
         UserDefaults.standard.set(Date(), forKey: udkey_lastQuoteTimestamp)
+
+        setNotification()
+
     }
     
-    func readQuoteList(resetCurIdx: Bool) {
-        print("readQuoteList")
-        let json = UserDefaults.standard.object(forKey: udkey_quotesList)
-        if let jsonArray = json as? [Dictionary<String, String>] {
-//            for item in jsonArray {
-//                guard let quoteText = item["quote"] else {continue}
-//                guard let authorText = item["author"] else {continue}
-//                quotesList.append(quoteText)
-//                authorsList.append(authorText)
-//            }
-            quotesList = jsonArray
+    func loadQuoteList(resetCurIdx: Bool) {
+        print("[MainView] loadQuoteList")
+        let recList = UserDefaults.standard.object(forKey: udkey_recList) as? [Dictionary<String, String>] ?? []
+        let ownList = UserDefaults.standard.object(forKey: udkey_ownList) as? [Dictionary<String, String>] ?? []
+        
+        // pick randmoized items from ownList, and concatenate with recList
+        var ownListRand = ownList.shuffled()
+        if ownListRand.count > 0 {
+            let ownCap = min(ownListRand.count / 3, recList.count)
+            if ownListRand.count > ownCap {
+                ownListRand = Array(ownListRand[0..<ownCap])
+            }
         }
-        if resetCurIdx {
-            curIdx = 0
-            UserDefaults.standard.set(Date(), forKey: udkey_lastQuoteTimestamp)
+        // make sure the first one is from recList, and then shuffle the rest
+        displayList = []
+        if recList.count > 0 {
+            displayList = Array(recList[1...])
+        }
+        displayList += ownListRand
+        displayList.shuffle()
+        if recList.count > 0 {
+            displayList = Array(recList[0...0]) + displayList
+        }
+        print(displayList)
+        if displayList.count <= 0 {
+            displayList = [["quote": "No quotes yet.\n Enter thoughts to start.", "author": ""]]
+        }
+        
+        // if resetCurIdx {
+        if displayStatus == .loading {
+            curIdx = displayList.count - 1 // set to last, so it will be incremented to 0 later
+            displayStatus = .showing
+            showNextQuote()
         } else {
             curIdx = UserDefaults.standard.integer(forKey: udkey_curIdx)
+            if curIdx >= displayList.count {
+                curIdx = 0
+            }
         }
-        logger.log("reading curIdx: \(curIdx)")
+        print("[MainView] reading curIdx: \(curIdx)")
     }
     
     
     func checkFirstStart() {
         // check user defaults
-        let wishStr = UserDefaults(suiteName: appGroup)?.string(forKey: "wish") ?? ""
+        let wishStr = UserDefaults(suiteName: appGroup)?.string(forKey: udkey_wish) ?? ""
         if wishStr.isEmpty {
             showThoughts = true
             disableThoughtsCancel = true
             ReportUtils.shared.sendRequest(key: "firstStart", value: "")
         }
+
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge, .provisional]) { granted, error in
+            // if let error = error {
+            //     // Handle the error here.
+            // }
+            // Enable or disable features based on the authorization.
+        }
     }
+
+    func setNotification() {
+        UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+
+        // schedule the notification to send every n hours, based on user setting
+        // avoiding night time, i.e. 9am, 12pm, 3pm, 6pm, 9pm
+        let interval = RefreshTime.getUserDefault().intValue
+        var hour = 9
+        while hour <= 21 {
+            setSingleNotification(hour: hour)
+            hour += interval
+        }
+    }
+
+    func setSingleNotification(hour: Int) {
+        print("[MainView] setSingleNotification, hour: \(hour)")
+
+        let content = UNMutableNotificationContent()
+        content.title = "Quotes Tailored"
+        content.subtitle = "New quote is ready"
+        content.sound = .default
+
+        var dateComponents = DateComponents()
+        dateComponents.calendar = Calendar.current
+        dateComponents.hour = hour
+        dateComponents.minute = 0
+        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
+        // let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+        UNUserNotificationCenter.current().add(request)
+    }
+
 }
 
 #Preview {

@@ -23,25 +23,58 @@ extension UIApplication {
     }
 }
 
-struct ThoughtsView: View {
-    
-    enum RefreshTime: String, CaseIterable, Identifiable {
-        case hour1 = "1 hour"
-        case hour3 = "3 hours"
-        case hour24 = "24 hours"
-        var id: RefreshTime { self }
+enum RefreshTime: String, CaseIterable, Identifiable {
+    case hour1 = "1 hour"
+    case hour3 = "3 hours"
+    case hour24 = "24 hours"
+    var id: RefreshTime { self }
+}
+// string to enum
+extension RefreshTime: RawRepresentable {
+    public init(rawValue: String) {
+        switch rawValue {
+        case "1 hour":
+            self = .hour1
+        case "3 hours":
+            self = .hour3
+        case "24 hours":
+            self = .hour24
+        default:
+            self = .hour3
+        }
     }
-    @State private var selectedTime: RefreshTime = .hour3
+
+    // get global user default value
+    static public func getUserDefault() -> RefreshTime {
+        return RefreshTime(rawValue: (UserDefaults(suiteName: appGroup)!.string(forKey: udkey_refresh) ?? ""))
+    }
+
+    // to Int
+    public var intValue: Int {
+        switch self {
+        case .hour1:
+            return 1
+        case .hour3:
+            return 3
+        case .hour24:
+            return 24
+        }
+    }
+}
+
+
+struct ThoughtsView: View {
+    @State private var selectedTime: RefreshTime = RefreshTime.getUserDefault()
     
     @State private var wish: String = (UserDefaults(suiteName: appGroup)!.string(forKey: udkey_wish) ?? "")
     
-    @State private var showReminder = false
     @State private var showRating = false
     @State private var showFeedback = false
     @State private var feedbackStr: String = ""
     
     @Binding var showModal: Bool
     @Binding var disableCancel: Bool
+    @Binding var newThought: Bool
     
     let logger = Logger(subsystem: Bundle.main.bundleIdentifier!, category: "thoughtsview")
     
@@ -60,13 +93,17 @@ struct ThoughtsView: View {
                     }
                     ToolbarItem(placement: .primaryAction) {
                         Button("Done") {
-                            UserDefaults(suiteName: appGroup)!.set(self.$wish.wrappedValue, forKey: udkey_wish)
-                            ReportUtils.shared.sendRequest(key: "enteredThoughts", value: self.$wish.wrappedValue)
-                            WidgetCenter.shared.reloadAllTimelines()
-                            RequestQuotes.shared.getQuotes()
-                            ratingCheck()
-                            showReminder = true
-                            logger.log("tctc wishStr changed")
+                            let oldWishStr = UserDefaults(suiteName: appGroup)?.string(forKey: udkey_wish) ?? ""
+                            let newWishStr = self.$wish.wrappedValue
+                            if oldWishStr != newWishStr {
+                                UserDefaults(suiteName: appGroup)!.set(newWishStr, forKey: udkey_wish)
+                                ReportUtils.shared.sendRequest(key: "enteredThoughts", value: newWishStr)
+                                WidgetCenter.shared.reloadAllTimelines()
+                                RequestQuotes.shared.requestQuotes()
+                                ratingCheck()
+                                newThought = true
+                                print("[ThoughtsView] wishStr changed")
+                            }
                             self.showModal.toggle()
                         }
                         .foregroundColor(.white)
@@ -88,13 +125,7 @@ struct ThoughtsView: View {
                     .foregroundColor(.white)
                     .font(.title)
                     .bold()
-                
-//                Text("Quotes will be recommended based on your thoughts.")
-//                    .font(.footnote)
-//                    .foregroundColor(.white)
-//                    .padding([.bottom], 8)
-//                    .padding([.top], 1)
-                
+               
                 HStack(alignment: .center) {
                     Spacer()
                     
@@ -104,13 +135,7 @@ struct ThoughtsView: View {
                         .font(.title3)
 //                        .multilineTextAlignment(.center)
 //                        .lineLimit(4...10)
-                        .padding([.horizontal], 36)
-                        .padding([.vertical], 8)
-                        .background(
-                            RoundedRectangle(cornerRadius: 8)
-                                .fill(Color.white.opacity(0.7))
-                                .padding([.horizontal], 28)
-                        )
+                        .inputBox()
                     
                     Spacer()
                 }
@@ -135,21 +160,13 @@ struct ThoughtsView: View {
                                 }
                             }
                             .onChange(of:selectedTime) { value in
-        //                        print("selectedTime set = ", selectedTime)
                                 UserDefaults(suiteName: appGroup)!.set(selectedTime.rawValue, forKey: udkey_refresh)
                                 WidgetCenter.shared.reloadAllTimelines()
-                                logger.log("tctc refresh time changed")
+                                print("[ThoughtsView] refresh time changed to \(selectedTime.rawValue)")
                             }
-//                            .accentColor(.white)
                             .offset(x:-10)
                         }
                         .foregroundColor(.white)
-                        .onChange(of:selectedTime) { value in
-    //                        print("selectedTime set = ", selectedTime)
-                            UserDefaults(suiteName: appGroup)!.set(selectedTime.rawValue, forKey: udkey_refresh)
-                            WidgetCenter.shared.reloadAllTimelines()
-                            logger.log("tctc refresh time changed")
-                        }
                     }
                     Button(action: {
                         showFeedback = true
@@ -166,8 +183,10 @@ struct ThoughtsView: View {
         }
         .onAppear {
             // set default values
-//            UserDefaults(suiteName: appGroup)!.set("e.g. I want to get motivated", forKey: udkey_wish)
-            UserDefaults(suiteName: appGroup)!.set("3 hours", forKey: udkey_refresh)
+            // if udkey_refresh is not set, set it to 3 hours
+            if UserDefaults(suiteName: appGroup)!.string(forKey: udkey_refresh) == nil {
+                UserDefaults(suiteName: appGroup)!.set("3 hours", forKey: udkey_refresh)
+            }
             checkStatus()
         }
         .alert("We'd love to hear your feedback and will keep improving the app.", isPresented: $showFeedback, actions: {
@@ -216,7 +235,7 @@ struct ThoughtsView: View {
         var count = UserDefaults.standard.integer(forKey: udkey_wishUpdateCount)
         count += 1
         UserDefaults.standard.set(count, forKey: udkey_wishUpdateCount)
-        print("Process completed \(count) time(s).")
+        print("[ThoughtsView][ratingCheck] Process completed \(count) time(s).")
         
         // Keep track of the most recent app version that prompts the user for a review.
         let lastVersionPromptedForReview = UserDefaults.standard.string(forKey: udkey_lastReviewVer)
@@ -238,5 +257,5 @@ struct ThoughtsView: View {
 }
 
 #Preview {
-    ThoughtsView(showModal: .constant(true), disableCancel: .constant(false))
+    ThoughtsView(showModal: .constant(true), disableCancel: .constant(false), newThought: .constant(false))
 }
