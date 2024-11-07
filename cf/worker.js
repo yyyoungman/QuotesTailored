@@ -19,7 +19,7 @@ export default {
     let token = request.headers.get('Authorization')
     if (token) {
       token = token.replace('Bearer ', '')
-      if (token == 'cf-Kl814QbGR7tn050enmJdT3BlbkFJH4VX9XwQ6V3HmZo6hUq4') {
+      if (token == CF_TOKEN) {
         return true
       }
     }
@@ -109,7 +109,7 @@ export default {
     // 构造新的请求对象
     const proxyRequest = new Request(targetUrl, {
       method: 'POST',
-      headers: { 'Authorization': 'Bearer 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', 'content-type': 'application/json' },
+      headers: { 'Authorization': 'OPENAI_TOKEN', 'content-type': 'application/json' },
       body: JSON.stringify(reqBody) //request.body 
     })
   
