@@ -40,7 +40,7 @@ class RequestQuotes : ObservableObject {
  
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
-        request.addValue("Bearer cf-Kl814QbGR7tn050enmJdT3BlbkFJH4VX9XwQ6V3HmZo6hUq4", forHTTPHeaderField: "Authorization") // cloudflare
+        request.addValue("CF_APP_TOKEN", forHTTPHeaderField: "Authorization") // cloudflare
         request.httpBody = payload
         
         self.requestStatus = .requesting
